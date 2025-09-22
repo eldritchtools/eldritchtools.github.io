@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build && next export",
+    "build": "next build",
+    "deploy": "next build && touch out/.nojekyll && gh-pages -d out",
     "start": "next start",
-    "lint": "eslint",
-    "deploy": "gh-pages -d out"
+    "lint": "eslint"
   },
   "dependencies": {
     "next": "15.5.3",
