@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { FaGithub, FaYoutube } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -61,13 +60,7 @@ function KoFiButton() {
         rel="noreferrer"
         style={{ display: "inline-block" }}
     >
-        <Image
-            src="https://storage.ko-fi.com/cdn/kofi6.png?v=6"
-            alt="Buy Me a Coffee at ko-fi.com"
-            width={128}
-            height={36}
-            style={{ height: "2.25rem", width: "auto", border: "0" }}
-        />
+        <img height='36' style={{ border: '0px', height: "36px" }} src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' />
     </a>;
 }
 

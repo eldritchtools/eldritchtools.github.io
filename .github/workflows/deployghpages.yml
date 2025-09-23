@@ -1,43 +1,35 @@
-name: Deploy to GitHub Pages
+# This is a basic workflow to help you get started with Actions
 
+name: CI
+
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "build"
   build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20'   # Next.js requires Node 18+
+      - uses: actions/setup-node@v3.9.1
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build Next.js static export
-        run: npm run build
-
-      - name: Verify Tailwind output
-        run: |
-          CSS_FILES=$(find .next/static/css -name '*.css')
-          if [ -z "$CSS_FILES" ]; then
-            echo "❌ No CSS files found — Tailwind likely not applied!"
-            exit 1
-          fi
-          for f in $CSS_FILES; do
-            if [ ! -s "$f" ]; then
-              echo "❌ CSS file $f is empty — Tailwind build failed!"
-              exit 1
-            fi
-          done
-          echo "✅ Tailwind CSS built successfully."
-
-      - name: Deploy to GitHub Pages
+      - name: Build gh-pages
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git remote set-url origin https://eldritchtools:${{secrets.GITHUB_TOKEN}}@github.com/eldritchtools/eldritchtools
+          git remote set-url origin https://eldritchtools:${{secrets.GITHUB_TOKEN}}@github.com/eldritchtools/eldritchtools.github.io
+          npm install
           npm run deploy
