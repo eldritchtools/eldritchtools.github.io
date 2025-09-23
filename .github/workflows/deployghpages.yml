@@ -12,13 +12,28 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'   # Next.js requires Node 18+
+          node-version: '20'   # Next.js requires Node 18+
 
       - name: Install dependencies
         run: npm install
 
       - name: Build Next.js static export
         run: npm run build
+
+      - name: Verify Tailwind output
+        run: |
+          CSS_FILES=$(find .next/static/css -name '*.css')
+          if [ -z "$CSS_FILES" ]; then
+            echo "❌ No CSS files found — Tailwind likely not applied!"
+            exit 1
+          fi
+          for f in $CSS_FILES; do
+            if [ ! -s "$f" ]; then
+              echo "❌ CSS file $f is empty — Tailwind build failed!"
+              exit 1
+            fi
+          done
+          echo "✅ Tailwind CSS built successfully."
 
       - name: Deploy to GitHub Pages
         run: |
