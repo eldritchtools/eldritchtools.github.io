@@ -2,15 +2,28 @@ import Image from 'next/image';
 import { FaGithub, FaYoutube } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
 
-const iconClass="inline-flex items-center justify-center bg-white rounded-full w-9 h-9 mx-2 shadow-md text-black text-[1.5rem] no-underline transition-transform duration-200 ease-in-out";
-const iconClassRed="inline-flex items-center justify-center bg-white rounded-full w-9 h-9 mx-2 shadow-md text-[#FF0000] text-[1.5rem] no-underline transition-transform duration-200 ease-in-out"
+const iconClass = {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    borderRadius: "50%",
+    width: "2.25rem",
+    height: "2.25rem",
+    margin: "0 0.5rem",
+    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+    color: "#000",
+    fontSize: "1.5rem",
+    textDecoration: "none",
+    transition: "transform 0.2s ease-in-out",
+}
 
 function GithubIcon() {
     return <a
         href={"https://github.com/eldritchtools"}
         target="_blank"
         rel="noopener noreferrer"
-        className={iconClass}
+        style={iconClass}
         title="GitHub"
     >
         <FaGithub />
@@ -22,7 +35,7 @@ function YoutubeIcon() {
         href="https://www.youtube.com/@EldritchPlays"
         target="_blank"
         rel="noopener noreferrer"
-        className={iconClassRed}
+        style={{ ...iconClass, color: "red" }}
         title="YouTube"
     >
         <FaYoutube />
@@ -34,7 +47,7 @@ function XIcon() {
         href="https://x.com/EldritchTools"
         target="_blank"
         rel="noopener noreferrer"
-        className={iconClass}
+        style={iconClass}
         title="Twitter / X"
     >
         <FaXTwitter />
@@ -46,21 +59,21 @@ function KoFiButton() {
         href="https://ko-fi.com/J3J31IBV7N"
         target="_blank"
         rel="noreferrer"
-        className="inline-block"
+        style={{ display: "inline-block" }}
     >
         <Image
             src="https://storage.ko-fi.com/cdn/kofi6.png?v=6"
             alt="Buy Me a Coffee at ko-fi.com"
             width={128}
             height={36}
-            className="h-9 w-auto border-0"
+            style={{ height: "2.25rem", width: "auto", border: "0" }}
         />
     </a>;
 }
 
 export default function SocialLinks() {
     return (
-        <div className="flex items-center">
+        <div style={{ display: "flex", alignItems: "center" }}>
             <GithubIcon />
             <YoutubeIcon />
             <XIcon />
