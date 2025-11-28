@@ -7,11 +7,16 @@ import { Tooltip } from "react-tooltip";
 import styles from "./components.module.css";
 
 function App() {
+
+    if (window.location.hostname === "eldritchtools.github.io") {
+        window.location.replace("https://eldritchtools.com");
+    }
+
     return (
         <div className="App">
             <div style={{ padding: "3.5rem", paddingBottom: "5rem" }}>
                 <main style={{ display: "flex", flexDirection: "column", gap: "32px", alignItems: "center" }}>
-                    <img style={{ borderRadius: "50%", width: "128px", height: "128px" }} src={`${process.env.PUBLIC_URL}/logo.png`} alt="logo"/>
+                    <img style={{ borderRadius: "50%", width: "128px", height: "128px" }} src={`${process.env.PUBLIC_URL}/logo.png`} alt="logo" />
 
                     <div>A collection of free web tools for various games.</div>
 
